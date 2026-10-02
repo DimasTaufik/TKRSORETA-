@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi TKR - SMK Sore Tulungagung</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans">
+
+    <!-- Header & Navbar -->
+    <header class="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid font-bold fa-car-side text-3xl text-yellow-400"></i>
+                <div>
+                    <h1 class="font-bold text-lg leading-tight">Teknik Kendaraan Ringan (TKR)</h1>
+                    <p class="text-xs text-blue-200">SMK Sore Tulungagung</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex space-x-6 font-medium text-sm">
+                <a href="#dashboard" class="hover:text-yellow-400 transition">Dashboard</a>
+                <a href="#guru" class="hover:text-yellow-400 transition">Data Guru</a>
+                <a href="#siswa" class="hover:text-yellow-400 transition">Data Siswa</a>
+                <a href="#akademik" class="hover:text-yellow-400 transition">Jadwal & Pembelajaran</a>
+                <a href="#bkk" class="hover:text-yellow-400 transition bg-yellow-500 text-blue-900 px-3 py-1 rounded-md font-bold hover:bg-yellow-400">Menu BKK</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-4 gap-6">
+
+        <!-- Sidebar Info Guru Logged In -->
+        <aside class="md:col-span-1 bg-white p-6 rounded-xl shadow-sm border border-slate-200 h-fit">
+            <div class="text-center border-b pb-4 mb-4">
+                <div class="w-20 h-20 bg-blue-100 text-blue-800 rounded-full flex items-center justify-center mx-auto mb-3 text-2xl font-bold">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <h3 class="font-bold text-lg text-slate-800">Pak Guru TKR</h3>
+                <p class="text-xs text-slate-500">Guru Pengampu / Wali Kelas</p>
+            </div>
+            
+            <!-- Detail Informasi Guru -->
+            <div class="space-y-3 text-sm">
+                <div>
+                    <span class="text-slate-500 block text-xs">Nama Guru:</span>
+                    <span class="font-semibold text-slate-700">Drs. Ahmad Mubarok</span>
+                </div>
+                <div>
+                    <span class="text-slate-500 block text-xs">NIY Guru:</span>
+                    <span class="font-semibold text-slate-700">19850312 TKR 042</span>
+                </div>
+                <div>
+                    <span class="text-slate-500 block text-xs">Nomor HP / WhatsApp:</span>
+                    <span class="font-semibold text-slate-700">+62 812-3456-7890</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="md:col-span-3 space-y-8">
+
+            <!-- Ringkasan Statistik -->
+            <section id="dashboard" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="bg-blue-600 text-white p-5 rounded-xl shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs opacity-80 uppercase font-semibold">Total Siswa TKR</p>
+                        <h2 class="text-3xl font-bold mt-1">108</h2>
+                    </div>
+                    <i class="fa-solid fa-users text-4xl opacity-30"></i>
+                </div>
+                <div class="bg-emerald-600 text-white p-5 rounded-xl shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs opacity-80 uppercase font-semibold">Rata-rata Kehadiran</p>
+                        <h2 class="text-3xl font-bold mt-1">95.4%</h2>
+                    </div>
+                    <i class="fa-solid fa-clipboard-user text-4xl opacity-30"></i>
+                </div>
+                <div class="bg-orange-500 text-white p-5 rounded-xl shadow-sm flex items-center justify-between">
+                    <div>
+                        <p class="text-xs opacity-80 uppercase font-semibold">Jumlah Kelas TKR</p>
+                        <h2 class="text-3xl font-bold mt-1">3 Kelas</h2>
+                    </div>
+                    <i class="fa-solid fa-chalkboard text-4xl opacity-30"></i>
+                </div>
+            </section>
+
+            <!-- Data Siswa per Kelas, Kehadiran, Nilai & Perkembangan -->
+            <section id="siswa" class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-800">Data Siswa per Kelas</h2>
+                        <p class="text-xs text-slate-500">Monitoring kehadiran, nilai akademik, dan perkembangan siswa.</p>
+                    </div>
+                    <!-- Filter Kelas -->
+                    <select id="classFilter" class="bg-slate-50 border border-slate-300 text-slate-700 text-sm rounded-lg p-2.5 focus:ring-blue-500 focus:border-blue-500">
+                        <option value="X-TKR">Kelas X TKR</option>
+                        <option value="XI-TKR">Kelas XI TKR</option>
+                        <option value="XII-TKR">Kelas XII TKR</option>
+                    </select>
+                </div>
+
+                <!-- Tabel Data Siswa -->
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm text-left text-slate-600">
+                        <thead class="text-xs text-slate-700 uppercase bg-slate-100">
+                            <tr>
+                                <th class="px-4 py-3">No</th>
+                                <th class="px-4 py-3">Nama Siswa</th>
+                                <th class="px-4 py-3">Kelas</th>
+                                <th class="px-4 py-3">Kehadiran</th>
+                                <th class="px-4 py-3">Rata-rata Nilai</th>
+                                <th class="px-4 py-3">Perkembangan / Catatan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-200">
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-3">1</td>
+                                <td class="px-4 py-3 font-medium text-slate-900">Andi Pratama</td>
+                                <td class="px-4 py-3">X TKR</td>
+                                <td class="px-4 py-3"><span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">98% (Hadir)</span></td>
+                                <td class="px-4 py-3 font-semibold">88</td>
+                                <td class="px-4 py-3 text-xs text-slate-500">Sangat baik dalam praktikum sistem rem.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-3">2</td>
+                                <td class="px-4 py-3 font-medium text-slate-900">Bagus Setiawan</td>
+                                <td class="px-4 py-3">X TKR</td>
+                                <td class="px-4 py-3"><span class="bg-yellow-100 text-yellow-800 text-xs px-2 py-1 rounded">90% (Izin 2x)</span></td>
+                                <td class="px-4 py-3 font-semibold">82</td>
+                                <td class="px-4 py-3 text-xs text-slate-500">Perlu peningkatan pada pemahaman kelistrikan.</td>
+                            </tr>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-3">3</td>
+                                <td class="px-4 py-3 font-medium text-slate-900">Candra Wijaya</td>
+                                <td class="px-4 py-3">X TKR</td>
+                                <td class="px-4 py-3"><span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">100% (Hadir)</span></td>
+                                <td class="px-4 py-3 font-semibold">91</td>
+                                <td class="px-4 py-3 text-xs text-slate-500">Aktif, disiplin, dan terampil tune-up mesin.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Jadwal Pelajaran & Kegiatan Pembelajaran -->
+            <section id="akademik" class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Jadwal Pelajaran -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-calendar-days text-blue-600"></i> Jadwal Pelajaran TKR
+                    </h2>
+                    <ul class="space-y-3 text-sm">
+                        <li class="p-3 bg-slate-50 rounded-lg border-l-4 border-blue-600">
+                            <span class="font-bold block text-slate-700">Senin - Pemeliharaan Mesin Kendaraan (PMKR)</span>
+                            <span class="text-xs text-slate-500">Jam 07:00 - 11:30 | Bengkel Utama TKR</span>
+                        </li>
+                        <li class="p-3 bg-slate-50 rounded-lg border-l-4 border-blue-600">
+                            <span class="font-bold block text-slate-700">Selasa - Pemeliharaan Sasis & Pemindah Tenaga</span>
+                            <span class="text-xs text-slate-500">Jam 07:00 - 11:30 | Ruang Teori B</span>
+                        </li>
+                        <li class="p-3 bg-slate-50 rounded-lg border-l-4 border-blue-600">
+                            <span class="font-bold block text-slate-700">Rabu - Pemeliharaan Kelistrikan Kendaraan</span>
+                            <span class="text-xs text-slate-500">Jam 07:00 - 12:00 | Lab Kelistrikan Otomotif</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Kegiatan Pembelajaran -->
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-wrench text-blue-600"></i> Kegiatan Pembelajaran Utama
+                    </h2>
+                    <div class="space-y-3 text-sm text-slate-600">
+                        <div class="p-3 border rounded-lg">
+                            <h4 class="font-bold text-slate-700">1. Praktikum Overhaul Mesin</h4>
+                            <p class="text-xs">Bongkar pasang dan pembacaan komponen blok silinder serta sistem pelumasan.</p>
+                        </div>
+                        <div class="p-3 border rounded-lg">
+                            <h4 class="font-bold text-slate-700">2. Diagnostik Scanner EFI</h4>
+                            <p class="text-xs">Penggunaan modul OBD-II scanner untuk identifikasi kerusakan sensor kendaraan modern.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Timeline Semester Gasal & Genap -->
+            <section class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-lg font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-timeline text-blue-600"></i> Timeline Semester Gasal & Genap
+                </h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <!-- Gasal -->
+                    <div class="bg-blue-50 p-4 rounded-lg border border-blue-200">
+                        <h3 class="font-bold text-blue-900 border-b border-blue-200 pb-2 mb-2">Semester Gasal</h3>
+                        <ul class="list-disc list-inside space-y-1 text-xs text-blue-800">
+                            <td><b>Juli:</b> Awal Masuk & MPLS Jurusan</td>
+                            <td><b>Agustus - Oktober:</b> Pembelajaran Teori & Praktik Dasarmat</td>
+                            <td><b>Nopember:</b> Penilaian Tengah Semester (PTS)</td>
+                            <td><b>Desember:</b> PAS & Laporan Hasil Belajar</td>
+                        </ul>
+                    </div>
+                    <!-- Genap -->
+                    <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
+                        <h3 class="font-bold text-emerald-900 border-b border-emerald-200 pb-2 mb-2">Semester Genap</h3>
+                        <ul class="list-disc list-inside space-y-1 text-xs text-emerald-800">
+                            <td><b>Januari - Maret:</b> Pelaksanaan Praktik Kerja Lapangan (PKL)</td>
+                            <td><b>April:</b> Uji Kompetensi Keahlian (UKK) Otomotif</td>
+                            <td><b>Mei:</b> Penilaian Akhir Tahun (PAT)</td>
+                            <td><b>Juni:</b> Pembagian Rapor & Kelulusan</td>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Menu Link BKK (Bursa Kerja Khusus) -->
+            <section id="bkk" class="bg-yellow-50 border-2 border-yellow-400 p-6 rounded-xl shadow-sm">
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                    <div class="space-y-1 text-center sm:text-left">
+                        <h2 class="text-xl font-bold text-yellow-900 flex items-center gap-2 justify-center sm:justify-start">
+                            <i class="fa-solid fa-briefcase"></i> Bursa Kerja Khusus (BKK) SMK Sore
+                        </h2>
+                        <p class="text-xs text-yellow-800">Akses informasi lowongan pekerjaan, rekrutmen industri otomotif, dan penyaluran alumni TKR.</p>
+                    </div>
+                    <!-- PENTING: TEMPELKAN LINK BKK SEKOLAHAN PADA ATRIBUT 'href' DI BAWAH INI -->
+                    <a href="https://bkk.smk-sore-tulungagung.sch.id" target="_blank" class="bg-yellow-500 hover:bg-yellow-600 text-blue-950 font-bold px-6 py-3 rounded-lg text-sm shadow transition duration-200 whitespace-nowrap flex items-center gap-2">
+                        Kunjungi Portal BKK <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 text-slate-400 text-xs py-6 mt-12 text-center">
+        <p>&copy; 2026 Jurusan Teknik Kendaraan Ringan - SMK Sore Tulungagung. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
